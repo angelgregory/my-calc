@@ -1,8 +1,6 @@
-
 import { useState } from "react";
 
 import "./App.css";
-
 
 function CalcButton({ buttonLabel = "?", onClick }) {
    return (
@@ -20,15 +18,22 @@ function CalcScreen({ display = "?" }) {
 }
 
 function App() {
-   
-  const [disp, setDisp] = useState(0);
-  const numberClickHandler = (e) => {
-    e.preventDefault();
-    const value = e.target.innerHTML;
-    setDisp(value);
-    console.log(value);
-    // alert(value);
-  };
+   const [disp, setDisp] = useState(0);
+   const [num1, setNum1] = useState(0);
+
+   const numberClickHandler = (e) => {
+      e.preventDefault();
+      const value = e.target.innerHTML;
+      setDisp(disp+value);
+      console.log(value);
+     
+   };
+
+   const clearClickHandler = () => {
+      // setNum(0);
+      setDisp("0");
+      console.log(disp);
+   };
 
    return (
       <div className="App">
@@ -38,7 +43,7 @@ function App() {
             </div>
             <div className="button-section">
                <div className="layers">
-                  <CalcButton buttonLabel="CLR" onClick={numberClickHandler} />
+                  <CalcButton buttonLabel="CLR" onClick={clearClickHandler} />
                   <CalcButton buttonLabel="0" onClick={numberClickHandler} />
                   <CalcButton buttonLabel="=" onClick={numberClickHandler} />
                   <CalcButton buttonLabel="+" onClick={numberClickHandler} />
