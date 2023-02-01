@@ -20,27 +20,39 @@ function CalcScreen({ display }) {
 function App() {
    const [disp, setDisp] = useState("0");
    const [num1, setNum1] = useState("");
+   const [num2, setNum2] = useState("");
    const [oper, setOper] = useState("");
 
    const numberClickHandler = (e) => {
       e.preventDefault();
       const value = e.target.innerHTML;
-      setDisp(parseInt(disp + value));
+
+      if (oper === "+" || oper === "-" || oper === "x"|| oper === "÷") {
+         setNum2(parseInt(num2 + value));
+         setDisp(num2 + value);
+      } else {
+         setNum1(parseInt(num1 + value));
+         setDisp(num1 + value);
+      }
+
+      console.log("num1: ", num1);
+      console.log("num2: ", num2);
+
       console.log(value);
    };
 
    const operClickHandler = (e) => {
       e.preventDefault();
       const value = e.target.innerHTML;
-      setDisp(value);
-      setNum1(disp);
       setOper(value);
+      setDisp(value);
       console.log(value);
    };
    const compute = () => {
       let ans;
-      let firstNum = parseInt(num1);
-      let secNum = parseInt(disp);
+      let firstNum = num1;
+      let secNum = num2;
+
       switch (oper) {
          case "+":
             ans = firstNum + secNum;
@@ -54,9 +66,17 @@ function App() {
             ans = firstNum * secNum;
             setDisp(ans);
             break;
+            case "÷":
+               ans = firstNum / secNum;
+            setDisp(ans);
+         default:
+            return 0;
+            
+
       }
-      console.log("num1", num1);
-      console.log("oper", oper);
+      setNum1("");
+      setNum2("");
+      setOper("");
    };
 
    const clearClickHandler = () => {
