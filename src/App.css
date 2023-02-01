@@ -66,6 +66,9 @@
   gap: 10px;
   justify-content:space-evenly;
 }
+#sample{
+  background-color: black;
+}
 button{
   width: 100px;
   height: 50px;

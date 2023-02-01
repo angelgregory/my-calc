@@ -26,11 +26,15 @@ function App() {
    const numberClickHandler = (e) => {
       e.preventDefault();
       const value = e.target.innerHTML;
+      let operBool;
+      if (oper === "+" || oper === "-" || oper === "x" || oper === "÷"|| oper === "=") {
+         operBool = true;
+      }
 
-      if (oper === "+" || oper === "-" || oper === "x"|| oper === "÷") {
+      if (operBool) {
          setNum2(parseInt(num2 + value));
          setDisp(num2 + value);
-      } else {
+      } else{
          setNum1(parseInt(num1 + value));
          setDisp(num1 + value);
       }
@@ -40,15 +44,13 @@ function App() {
 
       console.log(value);
    };
-
+//i tried to combine equals and other operators to perform continuous task 
    const operClickHandler = (e) => {
       e.preventDefault();
       const value = e.target.innerHTML;
       setOper(value);
       setDisp(value);
       console.log(value);
-   };
-   const compute = () => {
       let ans;
       let firstNum = num1;
       let secNum = num2;
@@ -57,27 +59,60 @@ function App() {
          case "+":
             ans = firstNum + secNum;
             setDisp(ans);
+            setNum1(parseInt(ans));
             break;
          case "-":
             ans = firstNum - secNum;
             setDisp(ans);
+            setNum1(parseInt(ans));
             break;
          case "x":
             ans = firstNum * secNum;
             setDisp(ans);
             break;
-            case "÷":
-               ans = firstNum / secNum;
+         case "÷":
+            ans = firstNum / secNum;
             setDisp(ans);
+            setNum1(parseInt(ans));
+            break;
          default:
             return 0;
-            
-
       }
-      setNum1("");
+
       setNum2("");
-      setOper("");
    };
+   // const compute = () => {
+   //    let ans;
+   //    let firstNum = num1;
+   //    let secNum = num2;
+
+   //    switch (oper) {
+   //       case "+":
+   //          ans = firstNum + secNum;
+   //          setDisp(ans);
+   //          setNum1(parseInt(ans));
+   //          break;
+   //       case "-":
+   //          ans = firstNum - secNum;
+   //          setDisp(ans);
+   //          setNum1(parseInt(ans));
+   //          break;
+   //       case "x":
+   //          ans = firstNum * secNum;
+   //          setDisp(ans);
+   //          break;
+   //       case "÷":
+   //          ans = firstNum / secNum;
+   //          setDisp(ans);
+   //          setNum1(parseInt(ans));
+   //          break;
+   //       default:
+   //          return 0;
+   //    }
+
+   //    setNum2("");
+   //    setOper("");
+   // };
 
    const clearClickHandler = () => {
       // setNum(0);
@@ -95,14 +130,18 @@ function App() {
                <div className="layers">
                   <CalcButton buttonLabel="CLR" onClick={clearClickHandler} />
                   <CalcButton buttonLabel="0" onClick={numberClickHandler} />
-                  <CalcButton buttonLabel="=" onClick={compute} />
+                  <CalcButton buttonLabel="=" onClick={operClickHandler} />
                   <CalcButton buttonLabel="+" onClick={operClickHandler} />
                </div>
                <div className="layers">
                   <CalcButton buttonLabel="1" onClick={numberClickHandler} />
                   <CalcButton buttonLabel="2" onClick={numberClickHandler} />
                   <CalcButton buttonLabel="3" onClick={numberClickHandler} />
-                  <CalcButton buttonLabel="-" onClick={operClickHandler} />
+                  <CalcButton
+                     buttonLabel="-"
+                     className="specific"
+                     onClick={operClickHandler}
+                  />
                </div>
                <div className="layers">
                   <CalcButton buttonLabel="4" onClick={numberClickHandler} />
