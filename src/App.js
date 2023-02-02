@@ -69,6 +69,7 @@ function App() {
          case "x":
             ans = firstNum * secNum;
             setDisp(ans);
+            setNum1(parseInt(ans));
             break;
          case "÷":
             ans = firstNum / secNum;
